@@ -1,0 +1,82 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th class="align-middle" scope="col">#</th>
+        <th class="align-middle" scope="col">Departure date</th>
+        <th class="align-middle" scope="col">Return date</th>
+        <th class="align-middle" scope="col">Number of days</th>
+        <th class="align-middle" scope="col">Price for adults</th>
+        <th class="align-middle" scope="col">Price for children</th>
+        <th class="align-middle" scope="col">Promoted</th>
+
+
+        <th class="align-middle" scope="col">
+
+          <div class="row d-flex align-items-center">
+            <div class="col">
+              Operations
+            </div>
+            <div class="col">
+              <div class="input-group">
+                <input type="text" [(ngModel)]="searchValue" class="form-control">
+                <div class="input-group-append">
+                  <button (click)="addTrip()"  class="btn btn-success rounded-circle"><i class="fa fa-plus"
+                                                                                                aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let trip of trips | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
+        <td>{{ (trips.indexOf(trip)+1) }}</td>
+        <td>{{ trip.departureDate }}</td>
+        <td>{{ trip.returnDate }}</td>
+        <td>{{ trip.numberOfDays }}</td>
+        <td>{{ trip.priceForAdults }}</td>
+        <td>{{ trip.priceForChildren }}</td>
+        <td>{{trip.promoted}}</td>
+
+
+        <td>
+          <div class="btn-group">
+            <button (click)="edittrip(trip.id)" class="btn btn-outline-primary mx-1"><i class="fa fa-pencil"
+                                                                                                      aria-hidden="true"></i></button>
+            <button (click)="tripParticipants(trip.id)" class="btn btn-outline-warning mr-1"><i class="fa fa-users" aria-hidden="true"></i> </button>
+            <button (click)="open(content, trip.id)" class="btn btn-outline-danger"><i class="fa fa-trash"
+                                                                                              aria-hidden="true"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirm dialog</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 text-center">
+        Are you sure you want to delete this item?
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Delete click')">Delete</button>
+  </div>
+</ng-template>

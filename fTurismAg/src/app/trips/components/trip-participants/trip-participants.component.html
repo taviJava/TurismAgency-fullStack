@@ -1,0 +1,39 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <h2>Trip: {{trip.id}}</h2>
+    <hr>
+    <div class="row">
+      <div class="col-5">
+        <div class="form-group" >
+          <label>Unassigned Participants:</label>
+          <select [(ngModel)]="selUnParticipants" name="selUnParticipants" id="selUnParticipants" class="form-control selBox" multiple>
+            <option *ngFor="let participant of unParticipants" [ngValue]="participant"><i class="fa-user fa"></i>{{participant.firstName}} - {{participant.lastName}}</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="col-2 text-center">
+        <span>Operations:</span>
+        <br>
+        <button [disabled]="!selUnParticipants" (click)="assignParticipantsToTrip()" class="btn btn-secondary"><i class="fa fa-arrow-right"></i></button>
+        <br>
+        <br>
+        <button [disabled]="!selAsParticipants" (click)="unassignParticipantsFromTrip()" class="btn btn-secondary"><i class="fa fa-arrow-left"></i></button>
+      </div>
+      <div class="col-5">
+        <label>Assigned Participants:</label>
+        <select [(ngModel)]="selAsParticipants" name="selAsParticipants" id="selAsParticipants" class="form-control selBox" multiple>
+          <option *ngFor="let participant of trip.participantModels" [ngValue]="participant"><i class="fa-user fa"></i>{{participant.firstName}} - {{participant.lastName}}</option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="btn-group">
+      <a (click)="goToTripList()"
+         class="btn btn-secondary mx-1">Back
+      </a>
+    </div>
+  </div>
+</div>

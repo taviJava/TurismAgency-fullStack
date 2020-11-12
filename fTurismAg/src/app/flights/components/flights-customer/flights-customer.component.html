@@ -1,0 +1,66 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <h1>Flights</h1>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th class="align-middle" scope="col">Name</th>
+        <th class="align-middle" scope="col">Departure City</th>
+        <th class="align-middle" scope="col">Departure airoport</th>
+        <th class="align-middle" scope="col">Arrival City</th>
+        <th class="align-middle" scope="col">Arrival airoport</th>
+        <th class="align-middle" scope="col">Vacancies</th>
+
+        <th><button (click)="addFlight()" class="btn btn-success">Add+
+        </button>
+        </th>
+      </tr>
+      </thead>
+
+
+      <tbody>
+      <tr *ngFor="let flight of flights | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}" >
+        <td>{{ (flights.indexOf(flight)+1)}}</td>
+        <td>{{ flight.name }}</td>
+        <td>{{ flight.airportDeparture.cityModel.name }}</td>
+        <td>{{ flight.airportDeparture.name }}</td>
+        <td>{{ flight.airportArrival.cityModel.name }}</td>
+        <td>{{ flight.airportArrival.name }}</td>
+        <td>{{ flight.vacancies}}</td>
+
+
+        <td>
+          <div class="btn-group">
+            <button (click)="editFlight(flight.id)" class="btn btn-outline-primary mx-1"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></button>
+            <button (click)="open(content, flight.id)" class="btn btn-outline-danger"><i class="fa fa-trash"  ></i>
+            </button>
+
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirm dialog</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 text-center">
+        Are you sure you want to delete this item?
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Delete click')">Delete</button>
+  </div>
+</ng-template>
+

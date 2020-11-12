@@ -1,0 +1,359 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <nav class="navbar navbar-light bg-light">
+
+      <img src="https://files.123freevectors.com/wp-content/uploads/freevectorimage/looking-for-hotel-logo-template-free-vector-2040.jpg"
+           width="50" height="50" class="d-inline-block align-top" alt="">
+      <div><p>{{hotel.name}}</p></div>
+      <div class="btn-group">
+        <button (click)="editHotel(hotel.id)" class="btn btn-outline-primary mx-1"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></button>
+        <button (click)="open(content, hotel.id)" class="btn btn-outline-danger"><i class="fa fa-trash"  ></i>
+        </button>
+      </div>
+    </nav>
+    <mdb-carousel [animation]="'slide'">
+      <mdb-carousel-item *ngFor="let photo of photos | async">
+        <img class="d-block w-100" src="{{photo.url}}" height="500px" alt="First slide">
+      </mdb-carousel-item>
+    </mdb-carousel>
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirm dialog</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 text-center">
+        Are you sure you want to delete this item?
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Delete click')">Delete</button>
+  </div>
+</ng-template>
+
+<div id="price">
+  <div class="columns">
+    <ul class="price">
+      <li class="header">Simple Room</li>   <!-- aici va fi room.description -->
+      <li class="grey">$ 9.99 / Day</li>   <!-- aici va fi room.price -->
+      <li><b>Wi-fi</b></li>
+      <li><b>Pool</b></li>
+      <li><b>Tennis Field</b></li>
+      <li><b>Netflix</b></li>
+      <li class="grey"><a href="#" class="button">Get Offer</a></li>
+    </ul>
+  </div>
+  <div class="columns">
+    <ul class="price">
+      <li class="header">Breakfast & Dinner</li>
+      <li class="grey">$ 19.99 / Day</li>
+      <li><b>Wi-fi</b></li>
+      <li><b>Open Bar</b></li>
+      <li><b>Golf Field</b></li>
+      <li><b>Cinema</b></li>
+      <li class="grey"><a href="#" class="button">Get Offer</a></li>
+    </ul>
+  </div>
+
+  <div class="columns">
+    <ul class="price">
+      <li class="header">All Inclusive</li>
+      <li class="grey">$ 49.99 / Day</li>
+      <li><b>Room Service</b></li>
+      <li><b>Jacuzzi</b></li>
+      <li><b>Full Internet Cover</b></li>
+      <li><b>Strip Club</b></li>
+      <li class="grey"><a href="#" class="button">Get Offer</a></li>
+    </ul>
+  </div>
+
+</div>
+
+ &nbsp;
+
+
+  <div class="about-section">
+    <h1><b>Short description</b></h1>
+
+    <!-- Hotel.description -->
+    <p><i>" As the most recognized name in the industry, travelers all over the world have been saying
+      “Take me to the Hilton” for almost a century.
+      And because of our innovative approach to products, amenities and service,
+      Hilton continues to be synonymous with hotel across the globe.
+      Hilton Hotels & Resorts remains the stylish, forward thinking global leader of hospitality –
+      and we help make traveling easier with our smart design,
+      innovative restaurant concepts, authentic hospitality and commitment to the global community.. "</i> </p>
+    <p>Resize the browser window to see that this page is responsive by the way.</p>
+  </div>
+
+  <h2 style="text-align:center">Our Hotel</h2>
+  <div class="row">
+    <div class="column" style="margin: auto">
+      <div class="card">
+        <img src="assets/room1.jpg" alt="Jane" style="width:100%">
+        <div class="container">
+          <h2>Simple Room</h2>
+          <p class="title">Second Floor</p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>Hilton@example.com</p>
+          <p><button class="button">Explore</button></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column" style="margin: auto">
+      <div class="card">
+        <img src="assets/room2.jpg" alt="Mike" style="width:100%">
+        <div class="container">
+          <h2>Double Bed Room</h2>
+          <p class="title">Third Floor</p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>Hilton@example.com</p>
+          <p><button class="button">Explore</button></p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="column" style="margin: auto">
+      <div class="card">
+        <img src="assets/room3.jpg" alt="John" style="width:100%">
+        <div class="container">
+          <h2>Presidential Apartment</h2>
+          <p class="title">Last Floor</p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>Hilton@example.com</p>
+          <p><button class="button">Explore</button></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column" style="margin: auto ; width: 40%;">
+      <div class="card" >
+        <img src="assets/penthouse.jpg" alt="John" style="width:100%;">
+        <div class="container">
+          <h2>PentHouse</h2>
+          <p class="title">On top of Roof</p>
+          <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+          <p>Hilton@example.com</p>
+          <p><button class="button">Explore</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<hr>
+&nbsp;
+<hr>
+
+<div style="width: 60% ; margin: auto">
+  <span class="heading">User Rating</span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star checked"></span>
+  <span class="fa fa-star"></span>
+  <p>4.1 average based on 254 reviews.</p>
+  <hr style="border:3px solid #f1f1f1">
+
+  <div class="row">
+    <div class="side">
+      <div>5 star</div>
+    </div>
+    <div class="middle">
+      <div class="bar-container">
+        <div class="bar-5"></div>
+      </div>
+    </div>
+    <div class="side right">
+      <div>150</div>
+    </div>
+    <div class="side">
+      <div>4 star</div>
+    </div>
+    <div class="middle">
+      <div class="bar-container">
+        <div class="bar-4"></div>
+      </div>
+    </div>
+    <div class="side right">
+      <div>63</div>
+    </div>
+    <div class="side">
+      <div>3 star</div>
+    </div>
+    <div class="middle">
+      <div class="bar-container">
+        <div class="bar-3"></div>
+      </div>
+    </div>
+    <div class="side right">
+      <div>15</div>
+    </div>
+    <div class="side">
+      <div>2 star</div>
+    </div>
+    <div class="middle">
+      <div class="bar-container">
+        <div class="bar-2"></div>
+      </div>
+    </div>
+    <div class="side right">
+      <div>6</div>
+    </div>
+    <div class="side">
+      <div>1 star</div>
+    </div>
+    <div class="middle">
+      <div class="bar-container">
+        <div class="bar-1"></div>
+      </div>
+    </div>
+    <div class="side right">
+      <div>20</div>
+    </div>
+  </div>
+</div>
+
+&nbsp;
+<hr>
+
+<div style="display: block">
+  <h1 style="text-align: center"><b> Facilities </b></h1>
+
+  <div class="row">
+  <div class="column" style="margin: auto">
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="assets/wifi_318-1573.jpg" alt="Avatar" style="width: 300px ; height: 200px;">
+      </div>
+      <div class="flip-card-back">
+        <h1><b>Wi-fi</b></h1>
+        <p>Full Cover on Internet</p>
+        <h1>Good download speed</h1>
+      </div>
+    </div>
+  </div>
+  </div>
+
+    <div class="column" style="margin: auto">
+    <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="assets/png.png" alt="Avatar" style="width: 300px ; height: 200px;" >
+      </div>
+      <div class="flip-card-back">
+        <h1><b>Professionals</b></h1>
+        <p>Excelent Service</p>
+        <h1>Certified</h1>
+      </div>
+    </div>
+  </div>
+  </div>
+
+        <div class="column" style="margin: auto">
+        <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="assets/Dog-Icon-200x200.jpg" alt="Avatar" style="width: 300px ; height: 200px;">
+      </div>
+      <div class="flip-card-back">
+        <h1><b>Animal Friends</b></h1>
+        <p>Field for animals to play</p>
+        <p>Animal Lovers</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr>
+&nbsp;
+<hr>
+
+<h2 style="text-align:center"> <b>TESTIMONIALS</b></h2>
+
+&nbsp;
+
+<div>
+  <div class="container" style="margin-left: 15%">
+    <img src="assets/billgates.jpg" alt="Avatar" style="width:90px">
+    <p><span>Bill Gates</span> CEO at Microsoft.</p>
+    <p><i> " Hilton Hotel saved us from a holiday disaster." </i></p>
+  </div>
+
+  <div class="container" style="margin-left: 55%">
+    <img src="assets/snoop.jpg" alt="Avatar" style="width:90px">
+    <p><span >Snoop Dogg</span> Rapper</p>
+    <p><i> " No other is better than Hilton. " </i></p>
+  </div>
+
+  <div class="container" style="margin-left: 15%">
+    <img src="assets/trump.jpg" alt="Avatar" style="width:90px">
+    <p><span>Donald Trump</span> exCEO of U.S.A</p>
+    <p><i> " Hilton Hotel saved us from a holiday disaster." </i></p>
+  </div>
+
+  <div class="container" style="margin-left: 55%">
+    <img src="assets/danimocanu.jpg" alt="Avatar" style="width:90px">
+    <p><span>Anonimous</span> CEO at Viata Periculoasa.</p>
+    <p><i> " OK " </i></p>
+  </div>
+
+  <div class="container" style="margin-left: 15%">
+    <img src="assets/olguta.jpg" alt="Avatar" style="width:90px">
+    <p><span>Olguta the Stallion</span> Minister of something of Romania</p>
+    <p><i> " I Don't know how to write , my boyfriend wrote this for me. "</i></p>
+    <p><i> " It was a great holiday! " </i></p>
+  </div>
+</div>
+
+<hr>
+&nbsp;
+<hr>
+
+<!-- Footer -->
+<footer class="page-footer font-small" style="background-color: black">
+
+  <!-- Footer Elements -->
+  <div class="container" style="margin: auto ; background-color: black" >
+
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center">
+
+      <!--Grid column-->
+      <div class="col-md-6">
+
+        <!-- Video -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/BZB2skZl8kw"
+                  allowfullscreen></iframe>
+        </div>
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->

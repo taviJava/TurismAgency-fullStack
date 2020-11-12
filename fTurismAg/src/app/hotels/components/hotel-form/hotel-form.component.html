@@ -1,0 +1,64 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #hotelForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="hotel.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter hotel name"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">Name is required</div>
+
+
+      <div class="form-group">
+
+
+        <label for="cities">Cities</label>
+        <ng-multiselect-dropdown
+          [data]="cities"
+          [placeholder]="'Select the City'"
+          id="cities"
+          [(ngModel)]="selectedCity"
+          [ngModelOptions]="{standalone: true}"
+          [settings]="dropdownSettings"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+          <div [hidden]="" class="alert alert-danger">City is required</div>
+        </ng-multiselect-dropdown>
+      </div>
+
+      <div class="form-group">
+
+      <div *ngFor="let progressInfo of progressInfos" class="mb-2">
+        <span>{{ progressInfo.fileName }}</span>
+        <div class="progress">
+          <div
+            class="progress-bar progress-bar-info progress-bar-striped"
+            role="progressbar"
+            attr.aria-valuenow="{{ progressInfo.percentage }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [ngStyle]="{ width: progressInfo.percentage + '%' }"
+          >
+            {{ progressInfo.percentage }}%
+          </div>
+        </div>
+      </div>
+
+      <label class="btn btn-default">
+        <input type="file" accept="image/*" multiple (change)="selectPhoto($event)" />
+      </label>
+      </div>
+      <button (click)="goToHotelList()"
+         class="btn btn-secondary mx-1">Back
+      </button>
+      <button type="submit" [disabled]="!hotelForm.form.valid"
+              class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>

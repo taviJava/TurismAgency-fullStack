@@ -1,0 +1,83 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #tripForm="ngForm">
+
+      <div class="form-group">
+        <label for="departureDate">Departure date</label>
+        <input type="text" [(ngModel)]="trip.departureDate"
+               class="form-control"
+               id="departureDate"
+               name="departureDate"
+               placeholder="Enter departure date"
+               required #departureDate="ngModel">
+      </div>
+      <div [hidden]="!departureDate.pristine" class="alert alert-danger">Departure date is required</div>
+
+      <div class="form-group">
+        <label for="returnDate">Return date</label>
+        <input type="text" [(ngModel)]="trip.returnDate"
+               class="form-control"
+               id="returnDate"
+               name="returnDate"
+               placeholder="Enter return date"
+               required #returnDate="ngModel">
+      </div>
+      <div [hidden]="!returnDate.pristine" class="alert alert-danger">Return date is required</div>
+
+      <div class="form-group">
+        <label for="numberOfDays">Number of days</label>
+        <input type="text " [(ngModel)]="trip.numberOfDays"
+               class="form-control"
+               id="numberOfDays"
+               name="numberOfDays"
+               placeholder="Enter number of days"
+               required #numberOfDays="ngModel">
+      </div>
+      <div [hidden]="!numberOfDays.pristine" class="alert alert-danger">Duration is required</div>
+
+      <div class="form-group">
+        <label for="priceForAdults">Price for adults</label>
+        <input type="text" [(ngModel)]="trip.priceForAdults"
+               class="form-control"
+               id="priceForAdults"
+               name="priceForAdults"
+               placeholder="Enter price for adults"
+               required #priceForAdults="ngModel">
+        <div [hidden]="!priceForAdults.pristine" class="alert alert-danger">Price for adults is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="priceForChildren">Price for children</label>
+        <input type="text" [(ngModel)]="trip.priceForChildren"
+               class="form-control"
+               id="priceForChildren"
+               name="priceForChildren"
+               placeholder="Enter price for children"
+               required #priceForChildren="ngModel">
+      </div>
+      <div [hidden]="!priceForChildren.pristine" class="alert alert-danger">Price for children is required</div>
+
+      <div class="form-group">
+        <label for="promoted">Promoted</label>
+        <input type="text" [(ngModel)]="trip.promoted"
+               class="form-control"
+               id="promoted"
+               name="promoted"
+               placeholder="Status of trip"
+               required #promoted="ngModel">
+      </div>
+      <div [hidden]="!promoted.pristine" class="alert alert-danger">Status required</div>
+
+
+      <div class="btn-group">
+        <a (click)="goToTripList()"
+           class="btn btn-secondary mx-1">Back
+        </a>
+        <button type="submit" [disabled]="!tripForm.form.valid"
+                class="btn btn-info">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

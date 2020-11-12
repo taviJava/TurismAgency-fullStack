@@ -1,0 +1,73 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #flightForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="flight.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter flight name"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">Flight name is required</div>
+      <div class="form-group">
+        <label for="rowNumber">Number of rows</label>
+        <input type="number" [(ngModel)]="flight.rowsNumber"
+               class="form-control"
+               id="rowNumber"
+               name="rowNumber"
+               placeholder="Enter the number of rows"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">Flight name is required</div>
+      <div class="form-group">
+        <label for="seatsRowNumber">Number of seats per row</label>
+        <input type="number" [(ngModel)]="flight.seatsRowNumber"
+               class="form-control"
+               id="seatsRowNumber"
+               name="seatsRowNumber"
+               placeholder="Enter the row's seats number"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">Flight name is required</div>
+
+      <div class="form-group">
+        <label for="airportsDep">Airports Departure</label>
+        <ng-multiselect-dropdown
+          [data]="airports"
+          [placeholder]="'Select the Departure Airport'"
+          id="airportsDep"
+          [(ngModel)]="selectedAirportsDep"
+          [ngModelOptions]="{standalone: true}"
+          [settings]="dropdownSettings"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+          <div [hidden]="" class="alert alert-danger">Airport is required</div>
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="form-group">
+        <label for="airports">Airports</label>
+        <ng-multiselect-dropdown
+          [data]="airports"
+          [placeholder]="'Select the Arrival Airport'"
+          id="airports"
+          [(ngModel)]="selectedAirportsArr"
+          [ngModelOptions]="{standalone: true}"
+          [settings]="dropdownSettings"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+          <div [hidden]="" class="alert alert-danger">Airport is required</div>
+        </ng-multiselect-dropdown>
+      </div>
+      <button (click)="goToFlightList()"
+              class="btn btn-secondary mx-1">Back
+      </button>
+      <button type="submit" [disabled]="!flightForm.form.valid"
+              class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>

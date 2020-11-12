@@ -1,0 +1,44 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #roomAdd="ngForm">
+
+      <div class="form-group">
+        <label for="continents">RoomType</label>
+        <ng-multiselect-dropdown
+          [data]="roomtypes"
+          [placeholder]="'Select the RoomType'"
+          id="continents"
+          [(ngModel)]="selectedRoomtypes"
+          [ngModelOptions]="{standalone: true}"
+          [settings]="dropdownSettings"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+          [required]="selectedRoomtypes.length>0"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div [hidden]="selectedRoomtypes.length>0" class="alert alert-danger">RoomTypes is required</div>
+      <div class="form-group">
+        <label for="name">Number of rooms for this room type</label>
+        <input type="number" [(ngModel)]="numRooms"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter the number of rooms"
+               required #number="ngModel">
+      </div>
+      <div [hidden]="!number.pristine" class="alert alert-danger">Rooms number is required</div>
+
+      <div class="btn-group">
+        <a (click)="getRoomList()"
+           class="btn btn-secondary mx-1">Back
+        </a>
+        <button type="submit" [disabled]="!ifFormIsCompleted()"
+                class="btn btn-info">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

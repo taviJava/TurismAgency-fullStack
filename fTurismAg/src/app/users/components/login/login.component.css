@@ -1,0 +1,79 @@
+
+
+.bg-img {
+  /* The image used */
+  background-image: url("src/assets/bg-01.jpg");
+
+
+
+  /* Full height */
+  height: 100%;
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Add styles to the form container */
+.container {
+
+  bottom: 100px;
+  position: absolute;
+  right: 90px;
+  margin: 10px ;
+  max-width: 400px;
+  padding: 80px;
+  background-color: transparent;
+}
+
+
+#message{
+  top: 20px;
+  position: absolute;
+  right: 140px;
+  margin: 10px ;
+  padding: 20px;
+  background-color: transparent;
+  color: white;
+
+}
+#icons{
+  bottom: 0px;
+  position: absolute;
+  right: 200px;
+  margin: 10px ;
+  padding: 20px;
+  background-color: transparent;
+  color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: black;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.5;
+}
+
+.btn:hover {
+  opacity: 2;
+}

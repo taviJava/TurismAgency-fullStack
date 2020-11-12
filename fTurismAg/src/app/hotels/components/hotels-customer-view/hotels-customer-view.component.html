@@ -1,0 +1,31 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <div>
+      <nav class="navbar navbar-light bg-light">
+
+        <img src="https://files.123freevectors.com/wp-content/uploads/freevectorimage/looking-for-hotel-logo-template-free-vector-2040.jpg"
+             width="50" height="50" class="d-inline-block align-top" alt="">
+        <label for="search"></label>
+        <input id="search" type="text" [(ngModel)]="searchValue" class="form-control">
+        <button (click)="addHotel()" class="btn btn-success" id="add" style="margin-left:920px;">Add+
+        </button>
+
+      </nav>
+
+      <mat-grid-list cols="3"  >
+        <mat-grid-tile *ngFor="let hotel of hotels | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}"  >
+          <div class="hotelInfo">
+            <img id="img2" *ngIf=" hotel.photos | async as photos " [src]=photos[0].url alt="light">
+            <div class="hotelName"><p>Hotel name: {{hotel.name}}</p>
+              <p>City: {{hotel.cityModel.name}}</p></div>
+            <button class="btn " (click)="viewHotel(hotel.id)"> Details </button>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+
+  </div>
+</div>
+

@@ -1,0 +1,23 @@
+<app-menu></app-menu>
+<div class="theatre">
+
+  <div class="cinema-seats left container mr-lg-5 form">
+
+      <div class="row">
+
+      <div (click)="hideSeat(s,'.'+s.seatName)" class="seat {{s.seatName}} col-{{numberOfSeatsStyle}}" *ngFor="let s of seatsL">
+        <h6>{{s.seatName}}</h6>
+        </div>
+      </div>
+
+  </div>
+  <div class="cinema-seats right container">
+      <div class="row">
+      <div (click)="hideSeat(s,'.seat')" class="seat col-3" *ngFor="let s of seatsR">{{s.seatName}}</div>
+
+    </div>
+
+  </div>
+  </div>
+
+

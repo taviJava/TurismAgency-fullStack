@@ -1,0 +1,26 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit(cities[cities.length-1])" [formGroup]= myGroup #materiasAdd="ngForm">
+      <div class="form-group">
+        <label for="countries">Phone</label>
+        <ng-multiselect-dropdown
+          [data]="countries"
+          [placeholder]="getPlaceHolder(cities[cities.length-1])"
+          formControlName="countries"
+          id="countries"
+          [settings]="dropdownSettings"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div [hidden]="" class="alert alert-danger">Countries is required</div>
+      <div class="btn-group">
+        <button type="submit" [disabled]="!materiasAdd.form.valid"
+                class="btn btn-info">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

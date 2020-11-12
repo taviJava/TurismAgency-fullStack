@@ -1,0 +1,43 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #hotelEdit="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="hotel.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter hotel name"
+               required #name="ngModel"></div>
+      <div [hidden]="name.valid" class="alert alert-danger">Hotel name is required</div>
+
+      <div class="form-group">
+
+
+      <label for="cities">City</label>
+      <ng-multiselect-dropdown
+        [data]="cities"
+        [placeholder]="'Select the City'"
+        id="cities"
+        [(ngModel)]="selectedCity"
+        [ngModelOptions]="{standalone: true}"
+        [settings]="dropdownSettings"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+      >
+
+      </ng-multiselect-dropdown>
+  </div>
+  <div [hidden]="" class="alert alert-danger">City is required</div>
+  <div class="btn-group">
+    <a (click)="goToHotelList()"
+       class="btn btn-secondary mx-1">Back
+    </a>
+    <button type="submit" [disabled]="!hotelEdit.form.valid"
+            class="btn btn-info">Submit
+    </button>
+  </div>
+  </form>
+</div>
+</div>

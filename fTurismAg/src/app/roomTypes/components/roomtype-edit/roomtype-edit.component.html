@@ -1,0 +1,31 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #roomtEdit="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="roomType.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter roomtype name"
+               required #name="ngModel"></div>
+      <div [hidden]="name.valid" class="alert alert-danger">RoomType name is required</div>
+
+      <div class="form-group">
+        <label for="places">Places</label>
+        <input type="number" [(ngModel)]="roomType.places"
+               class="form-control"
+               id="places"
+               name="places"
+               placeholder="Enter places "
+               required #places="ngModel">
+        <div [hidden]="places.valid" class="alert alert-danger">RoomTypes places are required</div>
+
+        <button type="submit" [disabled]="!roomtEdit.form.valid"
+                class="btn btn-info">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

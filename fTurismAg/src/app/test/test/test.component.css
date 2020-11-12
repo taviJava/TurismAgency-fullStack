@@ -1,0 +1,38 @@
+label{display: block;}
+.cust-checkbox {
+  display: none;
+}
+.cust-checkbox + span{
+  background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRdyoqUvkpgK745ELuAnBPudxXfUm3HlcWeJw&usqp=CAU);
+  /*background: #999;*/
+  height: 30px;
+  width: 30px;
+  display:block;
+  padding: 0 0 0 0px;
+}
+.reserved .cust-checkbox + span{
+  background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRdyoqUvkpgK745ELuAnBPudxXfUm3HlcWeJw&usqp=CAU);
+}
+.selected .cust-checkbox + span{
+  background-image:url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRdyoqUvkpgK745ELuAnBPudxXfUm3HlcWeJw&usqp=CAU);
+}
+.cust-checkbox:checked + span{
+  height: 30px;
+  width: 30px;
+  display:block;
+  padding: 0 0 0 0px;
+}
+.cust-checkbox:disabled + span{
+  /*background: red;*/
+  height: 30px;
+  width: 30px;
+  display:block;
+  padding: 0 0 0 0px;
+}
+.seats{border: 1px solid #ccc;
+  padding: 0 15px;max-width: 550px;
+  margin: 50px auto 0}
+.info{     padding: 0 15px;
+  max-width: 530px;
+  margin: 50px auto 0
+}

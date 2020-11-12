@@ -1,0 +1,48 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #roomEdit="ngForm">
+
+      <div class="form-group">
+        <label for="name">description</label>
+        <input type="text" [(ngModel)]="room.description"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter roomtype name"
+               required #description="ngModel"></div>
+      <div [hidden]="description.valid" class="alert alert-danger">description is required</div>
+
+
+      <div class="form-group">
+        <label for="places">Places</label>
+        <input type="number" [(ngModel)]="room.number"
+               class="form-control"
+               id="places"
+               name="places"
+               placeholder="Enter places "
+               required #number="ngModel">
+        <div [hidden]="number.valid" class="alert alert-danger">Room number are required</div>
+
+        <div class="form-group">
+          <label for="continents">RoomType</label>
+          <ng-multiselect-dropdown
+            [data]="roomtypes"
+            [placeholder]="'Select the RoomType'"
+            id="continents"
+            [(ngModel)]="selectedRoomtypes"
+            [ngModelOptions]="{standalone: true}"
+            [settings]="dropdownSettings"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+        <div [hidden]="" class="alert alert-danger">RoomType is required</div>
+
+        <button type="submit" [disabled]="!roomEdit.form.valid"
+                class="btn btn-info">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

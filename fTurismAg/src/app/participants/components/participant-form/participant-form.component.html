@@ -1,0 +1,82 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #participantForm="ngForm">
+      <!--      First Name-->
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" [(ngModel)]="participant.firstName"
+               class="form-control"
+               id="firstName"
+               name="firstName"
+               placeholder="Enter first name"
+               required #firstName="ngModel">
+      </div>
+      <div [hidden]="!firstName.pristine" class="alert alert-danger">First name is required</div>
+      <!--      Last Name-->
+      <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input type="text" [(ngModel)]="participant.lastName"
+               class="form-control"
+               id="lastName"
+               name="lastName"
+               placeholder="Enter last name"
+               required #lastName="ngModel">
+      </div>
+      <div [hidden]="!lastName.pristine" class="alert alert-danger">Last name is required</div>
+      <!--      Age-->
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="text " [(ngModel)]="participant.age"
+               class="form-control"
+               id="age"
+               name="age"
+               placeholder="Enter your age"
+               required #age="ngModel">
+      </div>
+      <div [hidden]="!age.pristine" class="alert alert-danger">Age is required</div>
+      <!--      email-->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" [(ngModel)]="participant.email"
+               class="form-control"
+               id="email"
+               name="email"
+               placeholder="Enter your email address"
+               required #email="ngModel">
+        <div [hidden]="!email.pristine" class="alert alert-danger">Email is required</div>
+      </div>
+      <!--      Phone number-->
+      <div class="form-group">
+        <label for="phoneNumber">Phone number</label>
+        <input type="text" [(ngModel)]="participant.phoneNumber"
+               class="form-control"
+               id="phoneNumber"
+               name="phoneNumber"
+               placeholder="Enter your phone number"
+               required #phoneNumber="ngModel">
+      </div>
+      <div [hidden]="!phoneNumber.pristine" class="alert alert-danger">Phone number is required</div>
+      <!--      Address-->
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" [(ngModel)]="participant.address"
+               class="form-control"
+               id="address"
+               name="address"
+               placeholder="Enter your address"
+               required #address="ngModel">
+      </div>
+      <div [hidden]="!address.pristine" class="alert alert-danger">Address is required</div>
+
+      <div class="btn-group">
+        <a (click)="gotoParticipantsList()"
+           class="btn btn-secondary mx-1">Back
+        </a>
+        <button type="submit" [disabled]="!participantForm.form.valid"
+                class="btn btn-info">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

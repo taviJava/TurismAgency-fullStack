@@ -1,0 +1,43 @@
+
+<div class="bg-img">
+<div id="message">
+  <h1 style="font-family:'Apple Color Emoji'"><i><b>Looking for a trip?</b></i></h1>
+  <h1 style="font-family:'Apple Color Emoji'"><i><b>Access your account now!</b></i></h1>
+
+</div>
+  <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+  <div class="alert alert-success" *ngIf='loginSuccess'>{{successMessage}}</div>
+  <form action="/action_page.php" class="container">
+
+    <label ><b>Username</b></label>
+    <input type="text"  [(ngModel)]="username" placeholder="Enter username" name="username" required>
+
+    <label ><b>Password</b></label>
+    <input type="password"  [(ngModel)]="password" placeholder="Enter Password" name="psw" required>
+
+    <button (click)=handleLogin() type="submit" class="btn">Login</button>
+  </form>
+  <div id="icons">
+    <h1 style="font-family:'Apple Color Emoji'"><i><b>Or Connect with</b></i></h1>
+    <a href="https://www.google.ro/" target="_blank" class="gplus-ic">
+      <i id="google" class="fab fa-google-plus-g white-text mr-4"> </i>
+    </a>
+    <a href="https://www.facebook.com/" target="_blank" class="fb-ic">
+      <i id="facebook" class="fab fa-facebook-f white-text mr-4 mx-0"> </i>
+    </a>
+    <a href="https://twitter.com/?lang=ro" target="_blank" class="tw-ic">
+      <i id="twitter" class="fab fa-twitter white-text mr-4"> </i>
+    </a>
+    <a href="https://ro.linkedin.com/" target="_blank" class="li-ic">
+      <i id="linkedin" class="fab fa-linkedin-in white-text mr-4"> </i>
+    </a>
+    <a  href="https://www.instagram.com/?hl=ro" target="_blank" class="ins-ic">
+      <i id="instagram" class="fab fa-instagram white-text"> </i>
+    </a>
+    <h3 style="font-family:'Apple Color Emoji'"><i><b>Don't have an account yet? <a href="/register">
+      <p>Register now!</p>
+    </a>
+    </b></i></h3>
+
+  </div>
+</div>

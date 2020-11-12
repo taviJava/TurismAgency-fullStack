@@ -1,0 +1,46 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th class="align-middle" scope="col">#</th>
+        <th class="align-middle" scope="col">Room Type</th>
+        <th class="align-middle" scope="col">Room description</th>
+        <th class="align-middle" scope="col">Room Places</th>
+        <th class="align-middle" scope="col">Room Balcony</th>
+        <th class="align-middle" scope="col">
+          <div class="row d-flex align-items-center">
+            <div class="col">
+              Operations
+            </div>
+            <div class="col">
+              <div class="input-group">
+                <div class="col">
+                  <button (click)="addRoom()" class="btn btn-success">Add Room</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let ro of room">
+        <td>{{ ro.id }}</td>
+        <td>{{ ro.roomTypeModel.name }}</td>
+        <td>>{{ ro.roomTypeModel.description }}</td>
+        <td>>{{ ro.roomTypeModel.places }}</td>
+        <td>{{ ifHasBalcony(ro) }}</td>
+        <td>
+          <div class="btn-group">
+            <button (click)="editRoom(ro.id)" class="btn btn-primary mx-1">Edit</button>
+            <button (click)="deleteRoom(ro.id)" class="btn btn-danger">Delete</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

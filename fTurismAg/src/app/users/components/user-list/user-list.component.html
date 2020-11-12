@@ -1,0 +1,41 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th class="align-middle" scope="col">#</th>
+        <th class="align-middle" scope="col">Username</th>
+        <th class="align-middle" scope="col">Password</th>
+
+        <th class="align-middle" scope="col">
+          <div class="row d-flex align-items-center">
+            <div class="col">
+              Operations
+            </div>
+            <div class="col">
+              <button (click)="addUser()" class="btn btn-success">Add User</button>
+            </div>
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.password }}</td>
+
+
+        <td>
+          <div class="btn-group">
+            <button (click)="editUser(user.id)" class="btn btn-primary mx-1">Edit</button>
+            <button (click)="deleteUser(user.id)" class="btn btn-danger">Delete</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

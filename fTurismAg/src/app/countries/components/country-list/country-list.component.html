@@ -1,0 +1,64 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th class="align-middle" scope="col">#</th>
+        <th class="align-middle" scope="col">Country name</th>
+        <th class="align-middle" scope="col">Continent name</th>
+        <th class="align-middle" scope="col">
+          <div class="row d-flex align-items-center">
+            <div class="col">
+              Operations
+              <div class="input-group">
+                <label for="search"></label>
+                <input id="search" type="text" [(ngModel)]="searchValue" class="form-control">
+                <div class="col">
+                  <button (click)="addCountry()" class="btn btn-outline-success "><i  class="fa fa-plus  " aria-hidden="true">
+                  </i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let count of country | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}" >
+        <td>{{ (country.indexOf(count)+1) }}</td>
+        <td>{{count.name }}</td>
+        <td>{{count.continentModel.name }}</td>
+
+        <td>
+          <div class="btn-group">
+            <button (click)="editCountry(count.id)" class="btn btn-outline-primary mx-1"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></button>
+            <button (click)="open(content, count.id)" class="btn btn-outline-danger"><i class="fa fa-trash"  ></i>
+            </button>
+
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirm dialog</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 text-center">
+        Are you sure you want to delete this item?
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Delete click')">Delete</button>
+  </div>
+</ng-template>

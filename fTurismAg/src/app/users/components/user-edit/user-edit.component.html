@@ -1,0 +1,40 @@
+<app-menu></app-menu>
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #userEdit="ngForm">
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" [(ngModel)]="user.username"
+               class="form-control"
+               id="username"
+               name="username"
+               placeholder="Enter your username"
+               required #username="ngModel">
+        <div [hidden]="!username.pristine" class="alert alert-danger">Username is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="text" [(ngModel)]="user.password"
+               class="form-control"
+               id="password"
+               name="password"
+               placeholder="Enter your password"
+               required #password="ngModel">
+        <div [hidden]="!password.pristine" class="alert alert-danger">Password is required</div>
+      </div>
+
+
+      <div class="btn-group">
+        <a (click)="goToUserList()"
+           class="btn btn-secondary mx-1">Back
+        </a>
+        <button type="submit" [disabled]="!userEdit.form.valid"
+                class="btn btn-info">Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
