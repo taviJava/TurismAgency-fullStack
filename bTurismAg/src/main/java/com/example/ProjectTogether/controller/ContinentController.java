@@ -1,7 +1,9 @@
 package com.example.ProjectTogether.controller;
 
-import com.example.ProjectTogether.model.ContinentModel;
+import com.example.ProjectTogether.persistance.dto.ContinentDto;
+import com.example.ProjectTogether.persistance.model.ContinentModel;
 import com.example.ProjectTogether.repository.ContinentRepository;
+import com.example.ProjectTogether.service.ContinentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,32 +13,29 @@ import java.util.List;
 @CrossOrigin
 public class ContinentController {
   @Autowired
-  private ContinentRepository continentRepository;
+  private ContinentService continentService;
 
   @PostMapping("/continent")
-  public void addContinent(@RequestBody ContinentModel continentModel) {
-    continentRepository.save(continentModel);
+  public void addContinent(@RequestBody ContinentDto continentDto) {
+    continentService.save(continentDto);
   }
 
   @DeleteMapping("/continent/{id}")
   public void deleteContinent(@PathVariable(name = "id") Long id) {
-    continentRepository.deleteById(id);
+    continentService.delete(id);
   }
 
   @GetMapping("/continent")
-  public List<ContinentModel> getContinents() {
-    return continentRepository.findAll();
+  public List<ContinentDto> getContinents() {
+    return continentService.getAll();
   }
 
   @GetMapping("/continent/{id}")
-  public ContinentModel getContinentById(@PathVariable(name = "id") Long id) {
-    return continentRepository.findById(id).orElse(null);
+  public ContinentDto getContinentById(@PathVariable(name = "id") Long id) {
+    return continentService.getContinent(id);
   }
   @PutMapping("/continent")
-  public void updateContinent(@RequestBody ContinentModel continentModel){
-    ContinentModel updatedContinent = continentRepository.findById(continentModel.getId()).orElse(null);
-    updatedContinent.setName(continentModel.getName());
-    updatedContinent.setCountryModelList(continentModel.getCountryModelList());
-    continentRepository.save(continentModel);
+  public void updateContinent(@RequestBody ContinentDto continentDto){
+  continentService.update(continentDto);
   }
 }

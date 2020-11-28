@@ -1,5 +1,5 @@
 package com.example.ProjectTogether.repository;
-import com.example.ProjectTogether.model.ParticipantModel;
+import com.example.ProjectTogether.persistance.model.ParticipantModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

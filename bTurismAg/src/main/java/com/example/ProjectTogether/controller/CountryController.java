@@ -1,7 +1,9 @@
 package com.example.ProjectTogether.controller;
 
-import com.example.ProjectTogether.model.CountryModel;
+import com.example.ProjectTogether.persistance.dto.CountryDto;
+import com.example.ProjectTogether.persistance.model.CountryModel;
 import com.example.ProjectTogether.repository.CountryRepository;
+import com.example.ProjectTogether.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,33 +14,28 @@ import java.util.List;
 @CrossOrigin
 public class CountryController {
   @Autowired
-  private CountryRepository countryRepository;
+  private CountryService countryService;
 
   @PostMapping("/country")
-  public void addCountry(@RequestBody CountryModel countryModel) {
-    countryRepository.save(countryModel);
-
+  public void addCountry(@RequestBody CountryDto countryDto) {
+    countryService.save(countryDto);
   }
-
   @DeleteMapping("/country/{id}")
   public void deleteCountry(@PathVariable(name = "id") Long id) {
-    countryRepository.deleteById(id);
+    countryService.delete(id);
   }
 
   @GetMapping("/country")
-  public List<CountryModel> getCountries() {
-    return countryRepository.findAll();
+  public List<CountryDto> getCountries() {
+    return countryService.getAll();
   }
 
   @GetMapping("/country/{id}")
-  public CountryModel getCountryById(@PathVariable(name = "id") Long id) {
-    return countryRepository.findById(id).orElse(null);
+  public CountryDto getCountryById(@PathVariable(name = "id") Long id) {
+    return countryService.getOne(id);
   }
   @PutMapping("/country")
-  public void update(@RequestBody CountryModel countryModel){
-    CountryModel countryUpdate=countryRepository.findById(countryModel.getId()).orElse(null);
-    countryUpdate.setName(countryModel.getName());
-    countryUpdate.setContinentModel(countryModel.getContinentModel());
-    countryRepository.save(countryModel);
+  public void update(@RequestBody CountryDto countryDto){
+    countryService.update(countryDto);
   }
 }

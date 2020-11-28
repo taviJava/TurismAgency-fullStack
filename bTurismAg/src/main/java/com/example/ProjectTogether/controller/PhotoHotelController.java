@@ -1,9 +1,9 @@
 package com.example.ProjectTogether.controller;
 
-import com.example.ProjectTogether.model.HotelModel;
-import com.example.ProjectTogether.model.PhotoHotelModel;
-import com.example.ProjectTogether.model.files.ResponseFile;
-import com.example.ProjectTogether.model.files.ResponseMessage;
+import com.example.ProjectTogether.persistance.model.HotelModel;
+import com.example.ProjectTogether.persistance.model.PhotoHotelModel;
+import com.example.ProjectTogether.persistance.model.files.ResponseFile;
+import com.example.ProjectTogether.persistance.model.files.ResponseMessage;
 import com.example.ProjectTogether.repository.HotelRepository;
 import com.example.ProjectTogether.service.PhotoHotelStorageService;
 import org.springframework.beans.factory.annotation.Autowired;

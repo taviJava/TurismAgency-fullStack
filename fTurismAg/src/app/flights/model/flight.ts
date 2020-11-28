@@ -9,6 +9,7 @@ export class Flight {
   returnDay: string;
   departureHour: string;
   arriveHour: string;
+  seatPrice: number;
   rowsNumber: number;
   seatsRowNumber: number;
   airportDeparture: Airport;

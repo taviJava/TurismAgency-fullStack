@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AirportListComponent implements OnInit {
 
-  airport: Airport[];
+  airports: Airport[];
   closeResult = '';
   searchValue = '';
   p = 1;
@@ -30,8 +30,8 @@ export class AirportListComponent implements OnInit {
   // tslint:disable-next-line:typedef
   getAirports() {
     this.airportService.findAll().subscribe(data => {
-      this.airport = [];
-      this.airport = data;
+      this.airports = [];
+      this.airports = data;
     });
   }
 

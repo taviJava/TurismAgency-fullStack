@@ -1,9 +1,7 @@
 package com.example.ProjectTogether.controller;
 
 import com.example.ProjectTogether.common.utils.AuthenticationBean;
-import com.example.ProjectTogether.model.AirportModel;
-import com.example.ProjectTogether.model.UserModel;
-import com.example.ProjectTogether.repository.AirportRepository;
+import com.example.ProjectTogether.persistance.model.UserModel;
 import com.example.ProjectTogether.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

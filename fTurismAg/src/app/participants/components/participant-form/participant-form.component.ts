@@ -26,7 +26,7 @@ form: FormGroup = new FormGroup({});
   // tslint:disable-next-line:typedef
   onSubmit() {
     this.participantService.save(this.participant).subscribe(result =>
-    this.gotoParticipantsList());
+    this.router.navigate(['/paymentMessage']));
     console.log(this.form.value);
   }
 

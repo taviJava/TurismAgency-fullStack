@@ -33,10 +33,7 @@ import {CityListComponent} from './cities/components/city-list/city-list.compone
 import {CityAddComponent} from './cities/components/city-add/city-add.component';
 import {CityEditComponent} from './cities/components/city-edit/city-edit.component';
 import { AddPhotoComponent } from './photos/components/add-photo/add-photo.component';
-import {TripFormComponent} from './trips/components/trip-form/trip-form.component';
-import {TripListComponent} from './trips/components/trip-list/trip-list.component';
-import {TripEditComponent} from './trips/components/trip-edit/trip-edit.component';
-import {TripParticipantsComponent} from './trips/components/trip-participants/trip-participants.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {RoomtypeListComponent} from './roomTypes/components/roomtype-list/roomtype-list.component';
@@ -57,7 +54,6 @@ import {ParticipantService} from './participants/service/participant.service';
 import {PhotoService} from './photos/service/photo.service';
 import {PhotosService} from './hotels/service/photos.service';
 import {RoomTypeService} from './roomTypes/services/room-type.service';
-import {TripService} from './trips/service/trip.service';
 import {NgImageSliderModule} from 'ng-image-slider';
 import { UserListComponent } from './users/components/user-list/user-list.component';
 import { RegisterComponent } from './users/components/register/register.component';
@@ -71,7 +67,10 @@ import { HotelsCustomerViewComponent } from './hotels/components/hotels-customer
 import { FlightsCustomerComponent } from './flights/components/flights-customer/flights-customer.component';
 import { HomepageComponent } from './common/component/homepage/homepage.component';
 import { HotelCustomerComponent } from './hotels/components/hotel-customer/hotel-customer.component';
-import { TestComponent } from './test/test/test.component';
+import { PaymentComponent } from './common/component/payment/payment.component';
+import { PaymentMessageComponent } from './common/component/payment/payment-message/payment-message.component';
+import { ContactPageComponent } from './common/component/contact-page/contact-page.component';
+import { ContactMessageComponent } from './common/component/contact-page/contact-message/contact-message.component';
 
 
 
@@ -102,10 +101,6 @@ import { TestComponent } from './test/test/test.component';
     CityAddComponent,
     CityEditComponent,
     AddPhotoComponent,
-    TripListComponent,
-    TripFormComponent,
-    TripEditComponent,
-    TripParticipantsComponent,
     RoomtypeListComponent,
     RoomtypeAddComponent,
     RoomtypeEditComponent,
@@ -123,7 +118,10 @@ import { TestComponent } from './test/test/test.component';
     FlightsCustomerComponent,
     HomepageComponent,
     HotelCustomerComponent,
-    TestComponent,
+    PaymentComponent,
+    PaymentMessageComponent,
+    ContactPageComponent,
+    ContactMessageComponent,
   ],
     imports: [
         BrowserModule,
@@ -142,7 +140,7 @@ import { TestComponent } from './test/test/test.component';
 
     ],
   providers: [HotelService , RoomService , AirportService , CityService, CountryService , FlightService
-   , ParticipantService ,  PhotoService , PhotosService , RoomTypeService , TripService , UserServiceService,
+   , ParticipantService ,  PhotoService , PhotosService , RoomTypeService  , UserServiceService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,

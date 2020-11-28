@@ -53,7 +53,7 @@ export class AirportAddComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   goToAirportList() {
-    this.router.navigate(['airports']);
+    this.router.navigate(['/airports']);
   }
 
 // tslint:disable-next-line:typedef

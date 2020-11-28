@@ -1,11 +1,12 @@
 package com.example.ProjectTogether.controller;
 
 
-import com.example.ProjectTogether.model.CityModel;
-import com.example.ProjectTogether.model.CountryModel;
-import com.example.ProjectTogether.model.ParticipantModel;
+import com.example.ProjectTogether.persistance.dto.CityDto;
+import com.example.ProjectTogether.persistance.model.CityModel;
+import com.example.ProjectTogether.persistance.model.CountryModel;
 import com.example.ProjectTogether.repository.CityRepository;
 import com.example.ProjectTogether.repository.HotelRepository;
+import com.example.ProjectTogether.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,55 +17,34 @@ import java.util.Optional;
 @RestController
 @CrossOrigin
 public class CityController {
-    @Autowired
-    private CityRepository cityRepository;
-    @Autowired
-    private HotelRepository hotelRepository;
+
+   @Autowired
+   private CityService cityService;
 
     @PostMapping("/cities")
-    public void addCity(@RequestBody CityModel cityModel){
-        cityRepository.save(cityModel);
+    public void addCity(@RequestBody CityDto cityDto){
+        cityService.save(cityDto);
     }
 
     @GetMapping("/cities")
-    public List<CityModel> getCities(){
-        List<CityModel> cityModels = new ArrayList<>();
-        for (CityModel cityModel: cityRepository.findAll()){
-            CityModel city = new CityModel();
-            city.setId(cityModel.getId());
-            city.setName(cityModel.getName());
-            CountryModel country = new CountryModel();
-            country.setId(cityModel.getCountryModel().getId());
-            country.setName(cityModel.getCountryModel().getName());
-            city.setCountryModel(country);
-            cityModels.add(city);
-        }
-        return  cityModels;
+    public List<CityDto> getCities(){
+      return cityService.getAll();
     }
 
 
     @GetMapping("/cities/{id}")
-    public CityModel getById(@PathVariable(name = "id") Long idCity) {
-        Optional<CityModel> cityModelOptional = cityRepository.findById(idCity);
-        CityModel city = new CityModel();
-        if (cityModelOptional.isPresent()){
-            CityModel cityModel = cityModelOptional.get();
-            city.setId(cityModel.getId());
-            city.setName(cityModel.getName());
-        }
-        return city;
+    public CityDto getById(@PathVariable(name = "id") Long idCity) {
+   return cityService.getOne(idCity);
     }
 
     @PutMapping("/cities")
-    public void updateCity(@RequestBody CityModel cityModel){
-        CityModel updatedCity = cityRepository.findById(cityModel.getId()).orElse(null);
-        updatedCity.setName(cityModel.getName());
-        cityRepository.save(updatedCity);
+    public void updateCity(@RequestBody CityDto cityDto){
+        cityService.update(cityDto);
     }
 
     @DeleteMapping("/cities/{id}")
     public void deleteCity(@PathVariable (name = "id") Long id){
-        cityRepository.deleteById(id);
+        cityService.delete(id);
     }
 
 }

@@ -1,21 +1,15 @@
 package com.example.ProjectTogether.service;
 
-import com.example.ProjectTogether.model.HotelModel;
-import com.example.ProjectTogether.model.ReservationHotel;
-import com.example.ProjectTogether.model.RoomModel;
-import com.example.ProjectTogether.model.RoomTypeModel;
-import com.example.ProjectTogether.repository.HotelRepository;
-import com.example.ProjectTogether.repository.ReservationHotelRepository;
-import com.example.ProjectTogether.repository.RoomRepository;
-import com.example.ProjectTogether.repository.RoomTypeRepository;
+import com.example.ProjectTogether.persistance.model.*;
+import com.example.ProjectTogether.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ReservationService {
@@ -27,6 +21,8 @@ public class ReservationService {
     private ReservationHotelRepository reservationHotelRepository;
     @Autowired
     private RoomTypeRepository roomTypeRepository;
+    @Autowired
+    private VoucherHService voucherHService;
 
     private boolean ifIsReserved(RoomModel room, ReservationHotel rezNew){
         for (ReservationHotel rezOld: room.getReservations()){
@@ -57,58 +53,64 @@ public class ReservationService {
         return false;
     }
 
-    public void reserve(ReservationHotel reservation, long id){
+    public String reserve(ReservationHotel reservation, long id, VoucherH voucherH, String username, String packet) throws InterruptedException {
         Optional<HotelModel> hotelModelOptional = hotelRepository.findById(id);
+        int a = reservationHotelRepository.findAll().size();
         if (hotelModelOptional.isPresent()){
             HotelModel hotelModel = hotelModelOptional.get();
             HotelModel hotel = new HotelModel();
             hotel.setId(hotelModel.getId());
             List<RoomModel> roomModels = new ArrayList<>();
-            for (RoomModel roomModel: hotelModel.getRooms() ){
-                RoomModel roomModel1 = new RoomModel();
-                roomModel1.setId(roomModel.getId());
-                RoomTypeModel roomTypeModel = new RoomTypeModel();
-                roomTypeModel.setId(roomModel.getRoomTypeModel().getId());
-                roomTypeModel.setPlaces(roomModel.getRoomTypeModel().getPlaces());
-                roomModel1.setRoomTypeModel(roomTypeModel);
-                List<ReservationHotel> reservationHotels = new ArrayList<>();
-                for (ReservationHotel res: roomModel.getReservations()){
-                    ReservationHotel reser = new ReservationHotel();
-                    reser.setId(res.getId());
-                    reser.setPersonsNumber(res.getPersonsNumber());
-                    reser.setCheckInDate(res.getCheckInDate());
-                    reser.setCheckOutDate(res.getCheckOutDate());
-                    reservationHotels.add(reser);
-                }
-                roomModel1.setReservations(reservationHotels);
-                roomModels.add(roomModel1);
-            }
+            transform(roomModels,hotelModel);
             hotel.setRooms(roomModels);
             for (RoomModel room: hotel.getRooms()){
                 if (verifyPlaces(room,reservation)){
-                    if (room.getReservations().size()==0) {
-                        Time startTime = java.sql.Time.valueOf("14:00:00");                       // 23:32:45
-                        Time endTime = java.sql.Time.valueOf("12:00:00");
-                        reservation.setCheckInTime(startTime);
-                        reservation.setCheckOutTime(endTime);
-                        reservation.setRoom(room);
-                        reservationHotelRepository.save(reservation);
-                        break;
-
-                    }
-                    if (!ifIsReserved(room, reservation) && (room.getReservations().size()>0)) {
-                        Time startTime = java.sql.Time.valueOf("14:00:00");
-                        Time endTime = java.sql.Time.valueOf("12:00:00");
-                        reservation.setCheckInTime(startTime);
-                        reservation.setCheckOutTime(endTime);
-                        reservation.setRoom(room);
-                        reservationHotelRepository.save(reservation);
+                    if ((room.getReservations().size()==0) || (!ifIsReserved(room, reservation) && (room.getReservations().size()>0))) {
+                     saveReservation(reservation,room,voucherH,username,packet);
                         break;
                     }
-
-
                 }
             }
+        }
+        if (a==reservationHotelRepository.findAll().size()){
+            return "The reservation could not be added";
+        }else {
+            return "The reservation has been added";
+        }
+    }
+
+    private void saveReservation(ReservationHotel reservation, RoomModel room, VoucherH voucherH, String username, String packet) throws InterruptedException {
+        if ((room.getReservations().size()==0) || (!ifIsReserved(room, reservation) && (room.getReservations().size()>0))) {
+            Time startTime = java.sql.Time.valueOf("14:00:00");                       // 23:32:45
+            Time endTime = java.sql.Time.valueOf("12:00:00");
+            reservation.setCheckInTime(startTime);
+            reservation.setCheckOutTime(endTime);
+            reservation.setRoom(room);
+            reservationHotelRepository.save(reservation);
+            TimeUnit.SECONDS.sleep(2);
+            voucherHService.addReservationsH(voucherH,username,packet);
+        }
+    }
+
+    private void transform(List<RoomModel> roomModels, HotelModel hotelModel){
+        for (RoomModel roomModel: hotelModel.getRooms() ){
+            RoomModel roomModel1 = new RoomModel();
+            roomModel1.setId(roomModel.getId());
+            RoomTypeModel roomTypeModel = new RoomTypeModel();
+            roomTypeModel.setId(roomModel.getRoomTypeModel().getId());
+            roomTypeModel.setPlaces(roomModel.getRoomTypeModel().getPlaces());
+            roomModel1.setRoomTypeModel(roomTypeModel);
+            List<ReservationHotel> reservationHotels = new ArrayList<>();
+            for (ReservationHotel res: roomModel.getReservations()){
+                ReservationHotel reser = new ReservationHotel();
+                reser.setId(res.getId());
+                reser.setPersonsNumber(res.getPersonsNumber());
+                reser.setCheckInDate(res.getCheckInDate());
+                reser.setCheckOutDate(res.getCheckOutDate());
+                reservationHotels.add(reser);
+            }
+            roomModel1.setReservations(reservationHotels);
+            roomModels.add(roomModel1);
         }
     }
 
@@ -121,7 +123,6 @@ public class ReservationService {
             RoomTypeModel roomType = roomTypeModelOptional.get();
             for (int r = 1; r <= numRooms; r++){
                 RoomModel room = new RoomModel();
-                System.out.println(numRooms);
                 room.setRoomTypeModel(roomType);
                 room.setHotel(hotel);
                 roomRepository.save(room);

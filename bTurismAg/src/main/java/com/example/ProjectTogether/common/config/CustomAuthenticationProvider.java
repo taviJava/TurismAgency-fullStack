@@ -2,19 +2,16 @@ package com.example.ProjectTogether.common.config;
 
 
 import com.example.ProjectTogether.common.utils.Hasher;
-import com.example.ProjectTogether.model.UserModel;
+import com.example.ProjectTogether.persistance.model.UserModel;
 import com.example.ProjectTogether.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {

@@ -1,7 +1,9 @@
 package com.example.ProjectTogether.controller;
 
-import com.example.ProjectTogether.model.RoomTypeModel;
+import com.example.ProjectTogether.persistance.dto.RoomTypeDto;
+import com.example.ProjectTogether.persistance.model.RoomTypeModel;
 import com.example.ProjectTogether.repository.RoomTypeRepository;
+import com.example.ProjectTogether.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,44 +14,29 @@ import java.util.List;
 @CrossOrigin
 public class RoomTypeController {
     @Autowired
-    private RoomTypeRepository roomTypeRepository;
+    private RoomTypeService roomTypeService;
 
     @PostMapping("/roomType")
-    public void addRoomType(@RequestBody RoomTypeModel model) {
-        roomTypeRepository.save(model);
+    public void addRoomType(@RequestBody RoomTypeDto roomTypeDto) {
+        roomTypeService.save(roomTypeDto);
     }
 
     @DeleteMapping("/roomType/{id}")
     public void deleteRoomType(@PathVariable(name = "id") Long id) {
-        roomTypeRepository.deleteById(id);
+        roomTypeService.delete(id);
     }
 
     @GetMapping("/roomType")
-    public List<RoomTypeModel> getRoomType() {
-        List<RoomTypeModel> roomTypeModels = new ArrayList<>();
-        for (RoomTypeModel roomType: roomTypeRepository.findAll()){
-            RoomTypeModel roomTypeModel = new RoomTypeModel();
-            roomTypeModel.setId(roomType.getId());
-            roomTypeModel.setName(roomType.getName());
-            roomTypeModel.setPlaces(roomType.getPlaces());
-            roomTypeModel.setHasbalcony(roomType.isHasbalcony());
-            roomTypeModel.setDescription(roomType.getDescription());
-            roomTypeModels.add(roomTypeModel);
-
-        }
-        return roomTypeModels;
+    public List<RoomTypeDto> getRoomType() {
+      return roomTypeService.getAll();
     }
 
     @GetMapping("/roomType/{id}")
-    public RoomTypeModel getById(@PathVariable(name = "id") Long id) {
-        return roomTypeRepository.findById(id).orElse(null);
+    public RoomTypeDto getById(@PathVariable(name = "id") Long id) {
+        return roomTypeService.getOne(id);
     }
     @PutMapping("/roomType")
-    public void updateRoomType(@RequestBody RoomTypeModel roomTypeModel) {
-        RoomTypeModel updateRoomType = roomTypeRepository.findById(roomTypeModel.getId()).orElse(null);
-        updateRoomType.setName(roomTypeModel.getName());
-        updateRoomType.setPlaces(roomTypeModel.getPlaces());
-        updateRoomType.setRoomModelList(roomTypeModel.getRoomModelList());
-        roomTypeRepository.save(roomTypeModel);
+    public void updateRoomType(@RequestBody RoomTypeDto roomTypeDto) {
+        roomTypeService.update(roomTypeDto);
     }
 }

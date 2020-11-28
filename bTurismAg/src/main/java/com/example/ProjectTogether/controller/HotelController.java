@@ -1,13 +1,14 @@
 package com.example.ProjectTogether.controller;
 
 
-import com.example.ProjectTogether.model.CityModel;
-import com.example.ProjectTogether.model.CountryModel;
-import com.example.ProjectTogether.model.HotelModel;
-import com.example.ProjectTogether.model.ReservationHotel;
-import com.example.ProjectTogether.model.files.ResponseFile;
+import com.example.ProjectTogether.persistance.dto.HotelDto;
+import com.example.ProjectTogether.persistance.model.CityModel;
+import com.example.ProjectTogether.persistance.model.HotelModel;
+import com.example.ProjectTogether.persistance.model.ReservationHotel;
+import com.example.ProjectTogether.persistance.model.files.ResponseFile;
 import com.example.ProjectTogether.repository.HotelRepository;
 import com.example.ProjectTogether.repository.ReservationHotelRepository;
+import com.example.ProjectTogether.service.HotelService;
 import com.example.ProjectTogether.service.PhotoHotelStorageService;
 import com.example.ProjectTogether.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,66 +31,34 @@ public class HotelController {
   private HotelRepository hotelRepository;
   @Autowired
   private PhotoHotelStorageService photoHotelStorageService;
-
+  @Autowired
+ private  HotelService hotelService;
   @Autowired
   private ReservationService reservationService;
   @GetMapping("/hotels")
-  public List<HotelModel> getHotels() {
-    List<HotelModel> hotelModels = new ArrayList<>();
-    for (HotelModel hotelModel: hotelRepository.findAll()){
-      HotelModel hotel = new HotelModel();
-      hotel.setId(hotelModel.getId());
-      hotel.setName(hotelModel.getName());
-      hotel.setDescription(hotel.getDescription());
-      hotel.setPaket(hotelModel.getPaket());
-      CityModel cityModel = new CityModel();
-      cityModel.setName(hotelModel.getCityModel().getName());
-      hotel.setCityModel(cityModel);
-      hotelModels.add(hotel);
-
-    }
-
-
-    return hotelModels;
+  public List<HotelDto> getHotels() {
+   return hotelService.getAll();
   }
 
   @GetMapping("/hotels/{id}")
-  public HotelModel getHotel(@PathVariable(name = "id") Long id) {
-    Optional<HotelModel> hotelModelOptional = hotelRepository.findById(id);
-    HotelModel hotel = new HotelModel();
-    if (hotelModelOptional.isPresent()){
-      HotelModel hotelModel = hotelModelOptional.get();
-      hotel.setId(hotelModel.getId());
-      hotel.setName(hotelModel.getName());
-      hotel.setDescription(hotel.getDescription());
-      hotel.setPaket(hotelModel.getPaket());
-      CityModel cityModel = new CityModel();
-      cityModel.setName(hotelModel.getCityModel().getName());
-      hotel.setCityModel(cityModel);
-    }
-
-    return hotel;
+  public HotelDto getHotel(@PathVariable(name = "id") Long id) {
+  return hotelService.getOne(id);
   }
 
 
   @PostMapping("/hotels")
-  public void addHotel(@RequestBody HotelModel hotel) {
-    hotelRepository.save(hotel);
+  public void addHotel(@RequestBody HotelDto hotel) {
+    hotelService.save(hotel);
   }
 
   @DeleteMapping("/hotels/{id}")
   public void deleteHotel(@PathVariable(name = "id") Long hotelId) {
-    hotelRepository.deleteById(hotelId);
+    hotelService.delete(hotelId);
   }
 
   @PutMapping("/hotels")
-  public void updateHotel(@RequestBody HotelModel hotel) {
-    HotelModel updatedHotel = hotelRepository.findById(hotel.getId()).orElse(null);
-    updatedHotel.setName(hotel.getName());
-    updatedHotel.setStars(hotel.getStars());
-    updatedHotel.setDescription(hotel.getDescription());
-    updatedHotel.setPaket(hotel.getPaket());
-    hotelRepository.save(hotel);
+  public void updateHotel(@RequestBody HotelDto hotel) {
+ hotelService.update(hotel);
   }
   @GetMapping("/hotels/photos/{id}")
   public ResponseEntity<List<ResponseFile>> getListFiles(@PathVariable(name = "id") Long id) {
@@ -125,6 +94,22 @@ public class HotelController {
       reservationHotel.setCheckOutDate(reservation.getCheckOutDate());
       reservationHotel.setCheckOutTime(reservation.getCheckOutTime());
       reservationHotels.add(reservationHotel);
+    }
+    return reservationHotels;
+  }
+
+  @GetMapping("/reservationall")
+  public List<ReservationHotel> getAllRes(){
+    List<ReservationHotel> reservationHotels = new ArrayList<>();
+    for (ReservationHotel reservationHotel: reservationHotelRepository.findAll()){
+      ReservationHotel reservation = new ReservationHotel();
+      reservation.setPersonsNumber(reservationHotel.getPersonsNumber());
+      reservation.setCheckInDate(reservationHotel.getCheckOutDate());
+      reservation.setCheckInDate(reservationHotel.getCheckInDate());
+      reservation.setCheckInTime(reservationHotel.getCheckInTime());
+      reservation.setCheckOutTime(reservationHotel.getCheckOutTime());
+      reservation.setId(reservationHotel.getId());
+      reservationHotels.add(reservation);
     }
     return reservationHotels;
   }

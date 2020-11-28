@@ -1,7 +1,7 @@
 package com.example.ProjectTogether.service;
 
-import com.example.ProjectTogether.model.HotelModel;
-import com.example.ProjectTogether.model.PhotoHotelModel;
+import com.example.ProjectTogether.persistance.model.HotelModel;
+import com.example.ProjectTogether.persistance.model.PhotoHotelModel;
 import com.example.ProjectTogether.repository.HotelRepository;
 import com.example.ProjectTogether.repository.PhotoHotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;

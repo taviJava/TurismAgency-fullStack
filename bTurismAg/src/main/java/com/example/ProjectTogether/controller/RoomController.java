@@ -1,16 +1,13 @@
 package com.example.ProjectTogether.controller;
 
-import com.example.ProjectTogether.model.HotelModel;
-import com.example.ProjectTogether.model.ReservationHotel;
-import com.example.ProjectTogether.model.RoomModel;
+import com.example.ProjectTogether.persistance.model.ReservationHotel;
+import com.example.ProjectTogether.persistance.model.RoomModel;
 import com.example.ProjectTogether.repository.ReservationHotelRepository;
 import com.example.ProjectTogether.repository.RoomRepository;
 import com.example.ProjectTogether.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,14 +45,14 @@ public class RoomController {
         return roomRepository.findById(id).orElse(null);
     }
 
-    @PostMapping("/reserve/{id}/{dateIn}/{dateOut}/{numPers}")
-    public void reserve(@PathVariable(name = "id") Long id, @PathVariable(name = "dateIn") String dateIn, @PathVariable(name = "dateOut") String dateOut,@PathVariable(name = "numPers") int numPers) {
-        ReservationHotel reservation = new ReservationHotel();
-        reservation.setCheckInDate(java.sql.Date.valueOf(dateIn));
-        reservation.setCheckOutDate(java.sql.Date.valueOf(dateOut));
-        reservation.setPersonsNumber(numPers);
-        reservationService.reserve(reservation,id);
-    }
+//    @PostMapping("/reserve/{id}/{dateIn}/{dateOut}/{numPers}")
+//    public void reserve(@PathVariable(name = "id") Long id, @PathVariable(name = "dateIn") String dateIn, @PathVariable(name = "dateOut") String dateOut,@PathVariable(name = "numPers") int numPers) {
+//        ReservationHotel reservation = new ReservationHotel();
+//        reservation.setCheckInDate(java.sql.Date.valueOf(dateIn));
+//        reservation.setCheckOutDate(java.sql.Date.valueOf(dateOut));
+//        reservation.setPersonsNumber(numPers);
+//        reservationService.reserve(reservation,id);
+//    }
 
     @GetMapping("reserve/{id}")
     public ReservationHotel getReservation(@PathVariable(name = "id") Long id){

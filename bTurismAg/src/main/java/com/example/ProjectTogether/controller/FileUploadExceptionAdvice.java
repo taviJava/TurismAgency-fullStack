@@ -1,6 +1,6 @@
 package com.example.ProjectTogether.controller;
 
-import com.example.ProjectTogether.model.files.ResponseMessage;
+import com.example.ProjectTogether.persistance.model.files.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

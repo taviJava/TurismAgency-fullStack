@@ -59,7 +59,46 @@
               </div>
             </div>
           </form>
-          <form (ngSubmit)="onSubmit()"  #datesAdded="ngForm" style="width: 508px">
+          <form (ngSubmit)="onSubmit(content)"  #datesAdded="ngForm" style="width: 508px">
+            <div class="form-group">
+              <label for="firstName"></label>
+              <input type="text" [(ngModel)]="voucherh.firstName"
+                     class="form-control"
+                     id="firstName"
+                     name="firstName"
+                     placeholder="Enter the First name"
+                     required #number="ngModel">
+            </div>
+            <div class="form-group">
+              <label for="lastName"></label>
+              <input type="text" [(ngModel)]="voucherh.lastName"
+                     class="form-control"
+                     id="lastName"
+                     name="lastName"
+                     placeholder="Enter the Last name"
+                     required #number="ngModel">
+            </div>
+            <div class="form-group">
+              <label for="documentId"></label>
+              <input type="text" [(ngModel)]="voucherh.documentId"
+                     class="form-control"
+                     id="documentId"
+                     name="documentId"
+                     placeholder="Enter the documentId"
+                     required #number="ngModel">
+            </div>
+            <div class="form-group">
+              <label for="packetType">Packet Type</label>
+              <select type="text" [(ngModel)]="packet"
+                      class="form-control"
+                      id="packetType"
+                      name="packetType"
+                      placeholder="Select the Packet Type"
+              >
+                <option *ngFor="let pack of packets" [ngValue]="pack">{{pack}}</option>
+              </select>
+
+            </div>
             <div class="form-group">
               <label for="name"></label>
               <input type="number" [(ngModel)]="reservation.personsNumber"
@@ -70,9 +109,11 @@
                      required #number="ngModel">
             </div>
             <div [hidden]="!number.pristine" class="alert alert-danger">Persons number is required</div>
+           <a href="/payment">
             <button type="submit" [disabled]="!datesAdded.form.valid"
                     class="btn btn-info">Submit
             </button>
+           </a>
           </form>
         </div>
       </div>
@@ -82,3 +123,18 @@
 
   </div>
 
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirm dialog</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12 text-center">
+        {{message}}
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="gotoPage(modal.dismiss())">ok</button>
+  </div>
+</ng-template>

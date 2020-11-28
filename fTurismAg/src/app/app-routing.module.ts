@@ -22,10 +22,6 @@ import {CityListComponent} from './cities/components/city-list/city-list.compone
 import {CityEditComponent} from './cities/components/city-edit/city-edit.component';
 import {CityAddComponent} from './cities/components/city-add/city-add.component';
 import {AddPhotoComponent} from './photos/components/add-photo/add-photo.component';
-import {TripListComponent} from './trips/components/trip-list/trip-list.component';
-import {TripFormComponent} from './trips/components/trip-form/trip-form.component';
-import {TripEditComponent} from './trips/components/trip-edit/trip-edit.component';
-import {TripParticipantsComponent} from './trips/components/trip-participants/trip-participants.component';
 import {RoomtypeListComponent} from './roomTypes/components/roomtype-list/roomtype-list.component';
 import {RoomAddComponent} from './rooms/components/room-add/room-add.component';
 import {RoomListComponent} from './rooms/components/room-list/room-list.component';
@@ -44,11 +40,18 @@ import {HotelsCustomerViewComponent} from './hotels/components/hotels-customer-v
 import {FlightsCustomerComponent} from './flights/components/flights-customer/flights-customer.component';
 import {HomepageComponent} from './common/component/homepage/homepage.component';
 import {HotelCustomerComponent} from './hotels/components/hotel-customer/hotel-customer.component';
-import {TestComponent} from './test/test/test.component';
+import {PaymentComponent} from './common/component/payment/payment.component';
+import {PaymentMessageComponent} from './common/component/payment/payment-message/payment-message.component';
+import {ContactPageComponent} from './common/component/contact-page/contact-page.component';
+import {ContactMessageComponent} from './common/component/contact-page/contact-message/contact-message.component';
 
 
 const routes: Routes = [
   {path: 'getUsers', component: UserListComponent},
+  {path: 'payment', component: PaymentComponent},
+  {path: 'paymentMessage', component: PaymentMessageComponent},
+  {path: 'contact', component: ContactPageComponent},
+  {path: 'contactMessage', component: ContactMessageComponent},
   {path: 'homepage', component: HomepageComponent},
   {path: '', component: LoginComponent},
   {path: 'editUser/:id', component: UserEditComponent},
@@ -81,18 +84,13 @@ const routes: Routes = [
   {path: 'addCity', component: CityAddComponent},
   {path: 'editCity/:id', component: CityEditComponent},
   {path: 'photos', component: AddPhotoComponent},
-{path: 'trips', component: TripListComponent},
-{path: 'addTrip', component: TripFormComponent},
-{path: 'editTrip/:id', component: TripEditComponent},
-{path: 'tripparticipants/:id', component: TripParticipantsComponent},
 {path: 'roomType', component: RoomtypeListComponent},
 {path: 'addRoomType', component: RoomtypeAddComponent},
 {path: 'editRoomType/:id', component: RoomtypeEditComponent},
 {path: 'room/:id', component: RoomListComponent},
 {path: 'addRooms/:idH', component: RoomAddComponent},
 {path: 'editRoom/:id', component: RoomEditComponent},
-{path: 'menu', component: MenuComponent},
-  {path: 'test', component: TestComponent},
+{path: 'menu', component: MenuComponent}
   ];
 
 @NgModule({

@@ -1,48 +1,44 @@
 <app-menu></app-menu>
-<div class="card my-5">
-  <div class="card-body">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-      <tr>
-        <th class="align-middle" scope="col">#</th>
-        <th class="align-middle" scope="col">Airport Name</th>
-        <th class="align-middle" scope="col">City Name</th>
-        <th class="align-middle" scope="col">
-          <div class="row d-flex align-items-center">
-            <div class="col">
-              Operations
-            </div>
-            <div class="col">
-              <div class="input-group">
-                <input type="text" [(ngModel)]="searchValue" class="form-control">
-                <div class="col">
-                  <button (click)="addAirport()" class="btn btn-success">Add Airport</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr
-        *ngFor="let air of airport| filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
-        <td>{{ (airport.indexOf(air) + 1)}}</td>
-        <td>{{ air.name }}</td>
-        <td>{{ air.cityModel.name }}</td>
-
-        <td>
-          <div class="btn-group">
-            <button (click)="editAirport(air.id)" class="btn btn-primary mx-1">Edit</button>
-            <button (click)="open(content, air.id)" class="btn btn-danger">Delete</button>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
+<div style="position: relative">
 </div>
+<h1 style="text-align: center"><b>AIRPORTS</b></h1>
+<div class="col">
+  <div class="input-group">
+    <input type="text" [(ngModel)]="searchValue" class="form-control">
+    <button (click)="addAirport()" class="btn btn-success">+
+    </button>
+  </div>
+
+&nbsp;
+
+  <a href="https://www.bemytravelmuse.com/the-cheapest-destinations-to-travel-to/">
+  <h1 style="text-align: center ; color: black"><b><i>" Which countries in the world offer the most value?
+    Where can you travel to in 2020 that will allow you to go for longer,
+    enjoy a higher standard, and save more money?
+    The following are 30 destinations around the world that offer the essentials –
+    accommodation, transportation, and food .. Check it Out! "</i></b></h1>
+  </a>
+
+  <div id="div" *ngFor="let airport of airports | filter: searchValue | paginate : {itemsPerPage: numberOfItemsPerP, currentPage: p}">
+
+      <div class="card">
+        <img src="assets/airport.jpg" style="width:100%" alt="airport">
+        <h1>{{ airport.name }}</h1>
+        <p><b>{{ airport.cityModel.name }}</b></p>
+<a href="/flights">
+  <p><button class="btn-dark"> Reserve now! </button> </p>
+</a>
+        <button style="background-color: blue" (click)="editAirport(airport.id)" class="btn btn-outline-primary">Edit</button>
+          <button style="background-color: red" (click)="open(content, airport.id)" class="btn btn-outline-danger">Delete</button>
+        </div>
+      </div>
+
+
+
+
+  </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Confirm dialog</h4>

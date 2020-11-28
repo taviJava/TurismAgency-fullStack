@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Hotel} from '../model/hotel';
 import {Reservationh} from '../model/reservationh';
+import {Voucherh} from '../model/voucherh';
 
 @Injectable({
   providedIn: 'root'
@@ -40,8 +41,21 @@ export class HotelService {
   getHotelphotos(id: number): Observable<any> {
     return this.http.get(`${this.hotelsUrl}/photos/${id}`);
   }
-  // tslint:disable-next-line:typedef
-  public reserve(id: number, dateIn: string, dateOut: string, numPers: number){
-    return this.http.post<Reservationh>(`http://localhost:8080/reserve/${id}/${dateIn}/${dateOut}/${numPers}`, null);
+
+  // tslint:disable-next-line:typedef max-line-length
+  public reserve(id: number, dateIn: string, dateOut: string, numPers: number, voucher: Voucherh, username: string, packet: string): Observable<any>{
+    // tslint:disable-next-line:max-line-length
+    return this.http.post<any>(`http://localhost:8080/reserve/hotel/voucher/${id}/${dateIn}/${dateOut}/${numPers}/${username}/${packet}`, voucher);
   }
+
+  // tslint:disable-next-line:max-line-length
+  public reserve2(id: number, dateIn: string, dateOut: string, numPers: number, voucher: Voucherh, username: string, packet: string): Observable<HttpEvent<any>> {
+    const req = new HttpRequest('POST', `http://localhost:8080/reserve/hotel/voucher/${id}/${dateIn}/${dateOut}/${numPers}/${username}/${packet}`, voucher, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+    return this.http.request(req);
+  }
+
+  // @PostMapping("/reserve/hotel/voucher/{id}/{dateIn}/{dateOut}/{numPers}/{username}")
 }
